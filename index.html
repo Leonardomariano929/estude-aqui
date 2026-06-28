@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESAQ.COM | Inscrição Primavera V10</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; color: #333; }
+        
+        header { 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://unsplash.com');
+            background-size: cover; padding: 40px S; color: white; text-align: center;
+        }
+
+        .container { padding: 30px 5%; max-width: 800px; margin: auto; }
+
+        /* Estilo do Formulário */
+        .form-inscricao { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid #1a73e8;
+        }
+
+        .campo { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; /* Garante que o padding não quebre o layout */
+        }
+
+        .btn-enviar { 
+            background: #25d366; 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            width: 100%; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+
+        .btn-enviar:hover { background: #128c7e; transform: translateY(-2px); }
+        
+        .conversor-mini { background: #f0f7ff; padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ESAQ.COM</h1>
+    <p>Inscrição: Gestão Comercial Primavera V10</p>
+</header>
+
+<div class="container">
+    <div class="form-inscricao">
+        <h2>Formulário de Inscrição</h2>
+        <p>Preencha os dados abaixo para gerar a sua fatura e acesso.</p>
+
+        <form id="meuForm">
+            <div class="campo">
+                <label>Nome Completo:</label>
+                <input type="text" id="nome" placeholder="Ex: João Manuel" required>
+            </div>
+
+            <div class="campo">
+                <label>E-mail para Receber o Curso:</label>
+                <input type="email" id="email" placeholder="Ex: joao@gmail.com" required>
+            </div>
+
+            <div class="campo">
+                <label>Método de Pagamento Desejado:</label>
+                <select id="metodo">
+                    <option value="Multicaixa/IBAN">Multicaixa / IBAN (Kwanzas)</option>
+                    <option value="Airtm">Airtm (Dólares)</option>
+                </select>
+            </div>
+
+            <div class="conversor-mini">
+                <strong>Valor do Curso:</strong> 15.000 Kz <br>
+                <strong>Equivalente Airtm:</strong> <span id="valorAirtm">...</span> AirUSD
+            </div>
+
+            <button type="button" class="btn-enviar" onclick="enviarWhatsApp()">
+                Confirmar e Ir para o WhatsApp
+            </button>
+        </form>
+    </div>s
+</div>
+
+<footer>
+    <p style="text-align: center;">&copy; 2024 ESAQ.COM | WhatsApp: 929905867</p>
+</footer>
+
+<script>
+    // Taxa de conversão fixa
+    const taxaDolar = 950;
+    const precoKz = 15000;
+
+    // Atualiza o valor em Airtm assim que a página abre
+    window.onload = function() {
+        document.getElementById('valorAirtm').innerText = (precoKz / taxaDolar).toFixed(2);
+    };
+
+    function enviarWhatsApp() {
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const metodo = document.getElementById('metodo').value;
+
+        if(nome === "" || email === "") {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+
+        // Formatação da mensagem para o WhatsApp
+        const mensagem = `Olá ESAQ! Meu nome é *${nome}*.\n` +
+                         `Gostaria de me inscrever no curso Primavera V10.\n\n` +
+                         `📧 *E-mail:* ${email}\n` +
+                         `💳 *Pagamento:* ${metodo}\n` +
+                         `💰 *Valor:* ${precoKz} Kz`;
+
+        // URL do WhatsApp com a mensagem pronta
+        const url = `https://wa.me{encodeURIComponent(mensagem)}`;
+
+        // Abre o WhatsApp em uma nova aba
+        window.open(url, '_blank');s
+    }
+</script>
+
+</body>
+</html>
+
